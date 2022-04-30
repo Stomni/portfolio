@@ -1,0 +1,72 @@
+.cyber-container {
+  --aug-border: initial;
+  --aug-inlay: initial;
+  --aug-border-all: 2px;
+  --aug-inlay-all: 0px;
+  --aug-border-bg: #ff0490;
+  --aug-inlay-bg: black;
+  --aug-clip-tl1: initial;
+  --aug-clip-br1: initial;
+  --aug-tl1: 40px;
+  --aug-br1: 40px;
+
+  width: fit-content;
+  height: fit-content;
+  padding: 2rem;
+}
+
+.cyber-container-card {
+  --aug-border: initial;
+  --aug-inlay: initial;
+  --aug-border-all: 2px;
+  --aug-inlay-all: 0px;
+  --aug-border-bg: #fffc00;
+  --aug-inlay-bg: black;
+  --aug-clip-tl1: initial;
+  --aug-clip-br1: initial;
+  --aug-clip-tr1: initial;
+  --aug-clip-bl1: initial;
+  --aug-clip-b: 30px;
+  width: 100%;
+  height: fit-content;
+  padding: 1.2rem;
+}
+
+.reticle {
+    margin-left: 10rem;
+    --aug-all-width: 350px;
+    color: #fffc00;
+    --reticle-color: currentColor;
+    --reticle-size: calc(var(--aug-all-width) * 0.25);
+    --aug-border-bg: radial-gradient(
+      circle at top center,
+      var(--reticle-color) var(--reticle-size),
+      transparent var(--reticle-size)
+    ), radial-gradient(
+      circle at bottom 13.92% right 6.89%,
+      var(--reticle-color) var(--reticle-size),
+      transparent var(--reticle-size)
+    ), radial-gradient(
+      circle at bottom 13.92% left 6.89%,
+      var(--reticle-color) var(--reticle-size),
+      transparent var(--reticle-size)
+    );
+    transform-origin: 50% 56%;
+    transform: rotateZ(0deg);
+    transition: transform 0.75s ease-out, color 0.75s ease-out;
+    background: radial-gradient(
+      circle at 50% 56%,
+      var(--reticle-color) 0.25rem,
+      transparent 0.25rem
+    );
+  }
+  .reticle:hover {
+    transform: rotateZ(720deg);
+    color: red;
+  }
+
+@media (max-height: 747px) {
+  .reticle {
+    --aug-all-width: 150px;
+  }
+}
