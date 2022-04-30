@@ -30,6 +30,20 @@ export const theme = extendTheme({
                     boxShadow: "none"
                 }
             }
+        },
+        IconButton: {
+            baseStyle: {
+                _focus: {
+                    boxShadow: "none"
+                }
+            }
+        },
+        Link: {
+            baseStyle: {
+                _focus: {
+                    boxShadow: "none"
+                }
+            }
         }
     }
 });

@@ -11,12 +11,17 @@ import {
   useMediaQuery,
   IconButton,
   VStack,
-  keyframes,
   Slide,
   useDisclosure,
   Link,
+  keyframes,
 } from "@chakra-ui/react";
-import { ArrowRightIcon, HamburgerIcon } from "@chakra-ui/icons";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  EmailIcon,
+  HamburgerIcon,
+} from "@chakra-ui/icons";
 import { useState } from "react";
 
 import { theme } from "./theme/index";
@@ -25,14 +30,72 @@ import { ProjectCard } from "./components/ProjectCard";
 import { ProjectList } from "./data/ProjectList";
 import { CyberContainer } from "./components/CyberContainer";
 import { GitHubIcon } from "./components/Icons";
+
 const title: String = "Hi, I´m Stefan,\n  Front-End Developer";
+const flicker = keyframes`0% {
+  opacity:0.1;
+  
+}
+
+2% {
+  opacity:1;
+  
+}
+8% {
+  opacity:0.1;
+  
+}
+9% {
+  opacity:1;
+  
+}
+12% {
+  opacity:0.1;
+  
+}
+15% {
+  opactity: 1;
+}
+20% {
+  opacity:1;
+  
+}
+25% {
+  opacity:0.3;
+  
+}
+28% {
+  opacity:1;
+  
+}
+
+70% {
+  opacity:1;
+ 
+}
+
+72% {
+  opacity:0.2;
+  
+}
+74% {
+  opacity: 1;
+}
+
+77% {
+  opacity:.9;
+  
+}
+100% {
+  opacity:.9;
+  
+}
+`;
 
 export function App() {
   const [index, setIndex] = useState(0);
   const { isOpen, onToggle } = useDisclosure();
   const [isMobile] = useMediaQuery("(min-width: 990px)");
-  const slideIn = keyframes`0% {transform: translateX(100%)} 100% {transform: translateX(0%)}`;
-  const slideOut = keyframes`0% {transform: translateX(0%)} 100% {transform: translateX(100%)}`;
 
   function scrollTo(element: string) {
     const component = document.getElementById(element);
@@ -77,7 +140,7 @@ export function App() {
             <chakra.a
               _hover={{
                 cursor: "pointer",
-                color: `${theme.colors.design.green}`,
+                color: `${theme.colors.design.pink}`,
               }}
               onClick={() => scrollTo("contact")}
               transition="all .2s ease-in"
@@ -110,7 +173,12 @@ export function App() {
               opacity=".9"
               padding={"5rem 0 0 0"}
             >
-              <VStack color={"white"} fontSize="24px" spacing={"30px"}>
+              <VStack
+                color={"white"}
+                fontSize="24px"
+                spacing={"30px"}
+                marginTop="10rem"
+              >
                 <chakra.a
                   onClick={() => {
                     scrollTo("project-heading");
@@ -196,6 +264,7 @@ export function App() {
           whiteSpace={"pre-wrap"}
           fontSize={"7xl"}
           textShadow={`0 0 10px ${theme.colors.design.project}`}
+          animation={`${flicker} 5s infinite linear`}
           _after={{
             content: `""`,
             position: "absolute",
@@ -229,7 +298,7 @@ export function App() {
           margin={{ base: "1rem", lg: "0" }}
           fontSize={"2xl"}
           variant="outline"
-          rightIcon={<ArrowRightIcon />}
+          leftIcon={<ArrowLeftIcon />}
           color={`${theme.colors.design.project}`}
           borderRadius={4}
           borderColor={`${theme.colors.design.project}`}
@@ -306,12 +375,46 @@ export function App() {
             Git
             <br />
             <br />
+            Ich liebe es etwas zu erschaffen, ob es jetzt Software, Stories oder
+            andere Ideen sind. Etwas in die Welt zu setzen und zu sehen wie
+            andere es benutzen oder damit interagieren, ist immer eine große
+            Freude für mich. Dabei ist es mir persönlich wichtig neue Dinge zu
+            lernen, aber auch sich in schon vorhandenen Fähigkeiten stetig zu
+            verbessern.
+            <br />
+            Ich bin eine lösungsorientierte Person in jeglicher Hinsicht und
+            dabei ist die Kommuikation auschlaggebend. Ob das kleinste Detail
+            oder das große Ganze, ich habe immer eine objektive Perspektive
+            auf die Dinge, bin mir aber auch bewusst die Dinge aus
+            verschiedenen Perspektiven zu sehen.
+            <br/>
+            <br/>
+            Interessen:
+            <br/>
+            Gaming | Dungeons and Dragons | Sport 
           </Text>
         </CyberContainer>
       </Flex>
-      <Link href="https://github.com/Stomni">
-        <GitHubIcon />
-      </Link>
+      <Flex id="contact" justify={"center"} gap="2rem" margin={"2rem"}>
+        <Link
+          href="https://github.com/Stomni"
+          target={"_blank"}
+          rel="noreferrer"
+        >
+          <GitHubIcon />
+        </Link>
+        <Link href="mailto:jackisch.stefan@gmail.com">
+          <EmailIcon
+            boxSize={10}
+            marginTop="1rem"
+            transition={".2s"}
+            _hover={{
+              color: `${theme.colors.design.pink}`,
+              transition: "all .2s ease-in-out",
+            }}
+          />
+        </Link>
+      </Flex>
     </ChakraProvider>
   );
 }

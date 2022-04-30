@@ -13,11 +13,18 @@ import {
   ModalOverlay,
   useDisclosure,
   VStack,
+  Image,
+  HStack,
+  IconButton,
+  Text,
+  useMediaQuery
 } from "@chakra-ui/react";
 import { theme } from "../theme/index";
 
 import { ProjectList } from "../data/ProjectList";
 import { CyberContainerCard } from "./CyberContainer";
+import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
+import { useState } from "react";
 
 const move = keyframes`0% {background-position: top center} 100% {background-position: bottom center}`;
 const pseudoEle = {
@@ -37,7 +44,9 @@ const afterPropertys = { filter: "auto", blur: "100px", opacity: ".5" };
 const afterElement = { ...pseudoEle, ...afterPropertys };
 
 export function ProjectCard({ name }: { name: String }) {
+  const [index, setIndex] = useState(0);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isMobile] = useMediaQuery("(max-width: 990px)")
   const project = ProjectList.find((e) => e.title === name);
   return (
     <>
@@ -86,7 +95,7 @@ export function ProjectCard({ name }: { name: String }) {
                 transition: "all .2s ease-in-out",
               }}
             >
-              <a href={project?.link} target="_blank">
+              <a href={project?.link} target="_blank" rel="noreferrer">
                 Visit Project
               </a>
             </ListItem>
@@ -98,21 +107,65 @@ export function ProjectCard({ name }: { name: String }) {
                 transition: "all .2s ease-in",
               }}
             >
-              <a href={project?.sourceCode} target={"_blank"}>
+              <a href={project?.sourceCode} target={"_blank"} rel="noreferrer">
                 View Sourcecode
               </a>
             </ListItem>
           </List>
         </Flex>
-        <Button color={"black"} bg={"white"} onClick={onOpen} margin={"2rem"}>
+        <Button color={"black"} bg={"white"} onClick={onOpen} margin={"1rem"}>
           Details
         </Button>
-        <Modal onClose={onClose} isOpen={isOpen} size={"full"}>
-          <ModalOverlay />
+        <Modal
+          onClose={onClose}
+          isOpen={isOpen}
+          size={"full"}
+          scrollBehavior="inside"
+        >
+          <ModalOverlay
+            bg={"none"}
+            backdropFilter="auto"
+            backdropBlur={"12px"}
+            backdropInvert="15%"
+          />
           <ModalContent bgColor={"#080A0C"}>
-            <ModalHeader alignSelf={"center"}>{project?.title}</ModalHeader>
+            <ModalHeader alignSelf={"center"} fontSize="40px">
+              {project?.title}
+            </ModalHeader>
             <ModalCloseButton />
-            <ModalBody></ModalBody>
+            <ModalBody>
+              <Flex direction={!isMobile ? "row" : "column-reverse"}>
+                <HStack spacing={"1rem"} justifyContent="center">
+                  <IconButton
+                    aria-label="previous"
+                    icon={<ArrowLeftIcon />}
+                    variant="ghost"
+                    disabled={index === 0 && true}
+                    onClick={() => {
+                      if (index >= 1) {
+                        setIndex(index - 1);
+                      }
+                    }}
+                  ></IconButton>
+                  <Image width={"40%"} src={project?.imgList[index]} borderRadius="12px"/>
+                  <IconButton
+                    aria-label="next"
+                    icon={<ArrowRightIcon />}
+                    variant="ghost"
+                    disabled={index === project?.imgList.length! - 1 && true}
+                    onClick={() => {
+                      if (index < project?.imgList.length! - 1) {
+                        setIndex(index + 1);
+                      }
+                    }}
+                  ></IconButton>
+                </HStack>
+                <VStack width={isMobile ? "100%" : "50%"} justifyContent={isMobile ? "center" : ""} alignItems={isMobile ? "center": ""} margin={isMobile ? "2rem 0 5rem 0" : ""}>
+                  <Heading>About</Heading>
+                  <Text whiteSpace={"pre-wrap"} paddingRight=".5rem">{project?.about}</Text>
+                </VStack>
+              </Flex>
+            </ModalBody>
           </ModalContent>
         </Modal>
       </Flex>

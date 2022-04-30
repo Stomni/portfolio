@@ -1,12 +1,14 @@
+import { createRoot } from "react-dom/client";
 import { ColorModeScript, theme } from "@chakra-ui/react";
-import ReactDOM from "react-dom";
+
+
 import { App } from "./App";
+const container = document.getElementById("root");
+const root = createRoot(container!);
 
-ReactDOM.render(
+root.render(
   <>
-    <ColorModeScript initialColorMode={theme.config.initialColorMode}/>
+    <ColorModeScript initialColorMode={theme.config.initialColorMode} />
     <App />
-  </>,
-
-  document.getElementById("root")
+  </>
 );
