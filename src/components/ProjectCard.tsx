@@ -135,7 +135,7 @@ export function ProjectCard({ name }: { name: String }) {
             <ModalCloseButton />
             <ModalBody>
               <Flex direction={!isMobile ? "row" : "column-reverse"}>
-                <HStack spacing={"1rem"} justifyContent="center">
+                <HStack spacing={".5rem"} justifyContent="center" width={"50%"}>
                   <IconButton
                     aria-label="previous"
                     icon={<ArrowLeftIcon />}
@@ -147,7 +147,7 @@ export function ProjectCard({ name }: { name: String }) {
                       }
                     }}
                   ></IconButton>
-                  <Image width={"40%"} src={project?.imgList[index]} borderRadius="12px"/>
+                  <Image width={"60%"}  src={project?.imgList[index]} borderRadius="12px"/>
                   <IconButton
                     aria-label="next"
                     icon={<ArrowRightIcon />}

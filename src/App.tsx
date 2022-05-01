@@ -110,7 +110,7 @@ export function App() {
           justifyContent={"space-evenly"}
           direction={"row"}
           right={"2rem"}
-          padding={"3rem"}
+          margin={"3rem"}
           color={"white"}
           w={"fit-content"}
           zIndex="999"
