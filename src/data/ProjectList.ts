@@ -35,7 +35,7 @@ export const ProjectList: {
     sourceCode: "https://github.com/Stomni/telos-world",
     link: "https://telos-world.vercel.app/",
     imgList: ["/images/telosWorld.png", "/images/telosWorld1.png", "/images/telosWorld2.png", "/images/telosWorld3.png"],
-    about: "Diese Website ist ein Wiki/Playground für meine Fantasy Welt.",
+    about: "Diese Website ist ein Wiki/Playground für meine Fantasy Welt.\n\n",
   },
   
 ];
