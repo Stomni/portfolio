@@ -43,7 +43,7 @@ const pseudoEle = {
 const afterPropertys = { filter: "auto", blur: "100px", opacity: ".5" };
 const afterElement = { ...pseudoEle, ...afterPropertys };
 
-export function ProjectCard({ name }: { name: String }) {
+export function ProjectCard({ name, lang }: { name: String, lang: String}) {
   const [index, setIndex] = useState(0);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isMobile] = useMediaQuery("(max-width: 990px)")
@@ -162,7 +162,7 @@ export function ProjectCard({ name }: { name: String }) {
                 </HStack>
                 <VStack width={isMobile ? "100%" : "50%"} justifyContent={isMobile ? "center" : ""} alignItems={isMobile ? "center": ""} margin={isMobile ? "2rem 0 5rem 0" : ""}>
                   <Heading>About</Heading>
-                  <Text whiteSpace={"pre-wrap"} paddingRight=".5rem">{project?.about}</Text>
+                  <Text whiteSpace={"pre-wrap"} paddingRight=".5rem">{lang === "DE" ? project?.about : project?.aboutEN}</Text>
                 </VStack>
               </Flex>
             </ModalBody>

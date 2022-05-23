@@ -15,6 +15,7 @@ import {
   useDisclosure,
   Link,
   keyframes,
+  Tag,
 } from "@chakra-ui/react";
 import {
   ArrowLeftIcon,
@@ -95,7 +96,8 @@ const flicker = keyframes`0% {
 export function App() {
   const [index, setIndex] = useState(0);
   const { isOpen, onToggle } = useDisclosure();
-  const [isMobile] = useMediaQuery("(min-width: 990px)");
+  const [isNotMobile] = useMediaQuery("(min-width: 990px)");
+  const [language, setLanguage] = useState("DE");
 
   function scrollTo(element: string) {
     const component = document.getElementById(element);
@@ -104,7 +106,28 @@ export function App() {
 
   return (
     <ChakraProvider theme={theme}>
-      {isMobile ? (
+      <Flex position={"fixed"} direction="row" bottom={"1rem"} left="1rem">
+        <Tag
+          onClick={() => setLanguage("DE")}
+          cursor="default"
+          variant={language === "DE" ? "solid" : "outline"}
+          bgColor={language === "DE" ? theme.colors.design.project : ""}
+          color={language === "DE" ? "black" : ""}
+        >
+          DE
+        </Tag>
+        <Tag
+          onClick={() => setLanguage("EN")}
+          cursor="default"
+          variant={language === "EN" ? "solid" : "outline"}
+          bgColor={language === "EN" ? theme.colors.design.project : ""}
+          color={language === "EN" ? "black" : ""}
+        >
+          EN
+        </Tag>
+      </Flex>
+
+      {isNotMobile ? (
         <Flex
           position={"fixed"}
           justifyContent={"space-evenly"}
@@ -312,7 +335,7 @@ export function App() {
         >
           Previos Project
         </Button>
-        <ProjectCard name={ProjectList[index].title} />
+        <ProjectCard name={ProjectList[index].title} lang={language} />
         <Button
           margin={{ base: "1rem", lg: "0" }}
           fontSize={"2xl"}
@@ -369,30 +392,60 @@ export function App() {
       </Flex>
       <Flex margin={"10rem"} justifyContent="center">
         <CyberContainer>
-          <Text padding={"2rem"} lineHeight={"1.6"} fontSize="18px">
-            Mein Techstack: <br />
-            Flutter | Dart | HTML | CSS | JavaScript | TypeScript | ReactJS |
-            Git
-            <br />
-            <br />
-            Ich liebe es etwas zu erschaffen, ob es jetzt Software, Stories oder
-            andere Ideen sind. Etwas in die Welt zu setzen und zu sehen wie
-            andere es benutzen oder damit interagieren, ist immer eine große
-            Freude für mich. Dabei ist es mir persönlich wichtig neue Dinge zu
-            lernen, aber auch sich in schon vorhandenen Fähigkeiten stetig zu
-            verbessern.
-            <br />
-            Ich bin eine lösungsorientierte Person in jeglicher Hinsicht und
-            dabei ist die Kommuikation auschlaggebend. Ob das kleinste Detail
-            oder das große Ganze, ich habe immer eine objektive Perspektive
-            auf die Dinge, bin mir aber auch bewusst die Dinge aus
-            verschiedenen Perspektiven zu sehen.
-            <br/>
-            <br/>
-            Interessen:
-            <br/>
-            Gaming | Dungeons and Dragons | Sport 
-          </Text>
+          {language === "DE" ? (
+            <Text padding={"2rem"} lineHeight={"1.6"} fontSize="18px">
+              Mein Techstack: <br />
+              Flutter | Dart | HTML | CSS | JavaScript | TypeScript | ReactJS |
+              Git
+              <br />
+              <br />
+              Ich liebe es etwas zu erschaffen, ob es jetzt Software, Stories
+              oder andere Ideen sind. Etwas in die Welt zu setzen und zu sehen
+              wie andere es benutzen oder damit interagieren, ist immer eine
+              große Freude für mich. Dabei ist es mir persönlich wichtig neue
+              Dinge zu lernen, aber auch sich in schon vorhandenen Fähigkeiten
+              stetig zu verbessern.
+              <br />
+              Ich bin eine lösungsorientierte Person in jeglicher Hinsicht und
+              dabei ist die Kommuikation auschlaggebend. Ob das kleinste Detail
+              oder das große Ganze, ich habe immer eine objektive Perspektive
+              auf die Dinge, bin mir aber auch bewusst die Dinge aus
+              verschiedenen Perspektiven zu sehen.
+              <br />
+              <br />
+              Interessen:
+              <br />
+              Gaming | Dungeons and Dragons | Sport
+            </Text>
+          ) : (
+            <Text padding={"2rem"} lineHeight={"1.6"} fontSize="18px">
+              My Techstack: <br />
+              Flutter | Dart | HTML | CSS | JavaScript | TypeScript | ReactJS |
+              Git
+              <br />
+              <br />
+              I love creating something, whether it's software, stories, or
+              other ideas. Putting something into the world and seeing how
+              others use it or interact with it is always a great joy for me.
+              Personally, it's important to me to learn new things, but also to
+              constantly improve my existing skills.I love creating something,
+              whether it's software, stories, or other ideas. Putting something
+              into the world and seeing how others use it or interact with it is
+              always a great joy for me. Personally, it's important to me to
+              learn new things, but also to constantly improve my existing
+              skills.
+              <br />
+              I am a solution-oriented person in every respect and communication
+              is crucial skill in that regard. Whether the smallest detail or
+              the big picture, I always have an objective perspective on things,
+              but am also aware of seeing things from different perspectives.
+              <br />
+              <br />
+              Interests:
+              <br />
+              Gaming | Dungeons and Dragons | Sports
+            </Text>
+          )}
         </CyberContainer>
       </Flex>
       <Flex id="contact" justify={"center"} gap="2rem" margin={"2rem"}>
